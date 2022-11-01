@@ -32,9 +32,9 @@ app.post('/api/project', projectController.createProject, (req, res) => {
 });
 
 // TODO: create task route handler
-// app.post('/api/task', projectController.pushTask, (req, res) => {
-//   return res.status(200).json(res.locals.project);
-// });
+app.post('/api/task', projectController.pushTask, (req, res) => {
+  return res.status(200).json(res.locals.project);
+});
 
 app.use((err, req, res, next) => {
   const defaultErr = {
