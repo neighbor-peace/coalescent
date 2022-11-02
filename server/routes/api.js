@@ -61,4 +61,13 @@ router.post(
   }
 );
 
+router.delete(
+  '/task',
+  projectController.deleteTask,
+  projectController.readProject,
+  (req, res) => {
+    return res.status(200).json(res.locals.projectArr);
+  }
+);
+
 module.exports = router;
