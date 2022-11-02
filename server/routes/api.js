@@ -35,8 +35,13 @@ router.get('/project', projectController.readProject, (req, res) => {
   return res.status(200).json(res.locals.projectArr);
 });
 
-router.post('/task', projectController.pushTask, (req, res) => {
-  return res.status(200).json(res.locals.project);
-});
+router.post(
+  '/task',
+  projectController.pushTask,
+  projectController.readProject,
+  (req, res) => {
+    return res.status(200).json(res.locals.projectArr);
+  }
+);
 
 module.exports = router;

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-export default function CreateProject({ createProject }) {
+export default function CreateProject({ createProject, closeProjectModal }) {
   // conditionally rendered
   // higher z level
   // TODO: css transition swipes it in
@@ -13,7 +13,12 @@ export default function CreateProject({ createProject }) {
   return (
     <>
       <h1>Create a new project</h1>
-      <form onSubmit={(e) => createProject(formData)}>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          createProject(formData);
+        }}
+      >
         <label htmlFor='projectTitle'>Enter a project title</label>
         <input
           id='projectTitle'
@@ -21,6 +26,12 @@ export default function CreateProject({ createProject }) {
           value={formData.title}
           onChange={updateForm}
         />
+        <button
+          type='button'
+          onClick={closeProjectModal}
+        >
+          Cancel
+        </button>
         <button>Create project</button>
       </form>
     </>

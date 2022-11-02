@@ -45,8 +45,6 @@ const projectController = {
       currentProject.tasks.push({ title, description, team });
       console.log(`Task pushed`);
       await currentProject.save();
-      console.log(`current project updated succesfully`);
-      res.locals.project = currentProject;
       next();
     } catch (err) {
       next({ log: `error in projectController.pushTask. ${err}` });
