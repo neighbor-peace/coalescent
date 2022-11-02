@@ -87,9 +87,30 @@ const projectController = {
       return next({ log: `error in projectController.pushTask. ${err}` });
     }
   },
+  updateTask: async (req, res, next) => {
+    console.log('updating task');
+    const { projectId, taskId, title, description, team } = req.body;
+    try {
+      const currentProject = await Project.findOne({ _id: projectId });
+      if (!currentProject) {
+        return next({
+          log: 'Error in projectController.updateTask: project not found',
+        });
+      }
+      const task = currentProject.tasks.id(taskId);
+      if (title) task.title = title;
+      if (description) task.description = description;
+      if (team) task.team = team;
+      await currentProject.save();
+      console.log('task updated');
+      return next();
+    } catch (err) {
+      return next({ log: `Error in projectController.updateTask. ${err}` });
+    }
+  },
   deleteTask: async (req, res, next) => {
     console.log('deleting task');
-    const { projectId, docId } = req.body;
+    const { projectId, taskId } = req.body;
     try {
       const currentProject = await Project.findOne({ _id: projectId });
       if (!currentProject) {
@@ -98,7 +119,7 @@ const projectController = {
         });
       }
       console.log('project found');
-      currentProject.tasks.pull({ _id: docId });
+      currentProject.tasks.pull({ _id: taskId });
       await currentProject.save();
       console.log('task deleted');
       return next();

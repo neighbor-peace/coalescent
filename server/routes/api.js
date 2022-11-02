@@ -61,6 +61,15 @@ router.post(
   }
 );
 
+router.patch(
+  '/task',
+  projectController.updateTask,
+  projectController.readProject,
+  (req, res) => {
+    return res.status(200).json(res.locals.projectArr);
+  }
+);
+
 router.delete(
   '/task',
   projectController.deleteTask,
