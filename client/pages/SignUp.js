@@ -23,7 +23,7 @@ export default function SignUp() {
         setFormData(initialFormState);
         console.log('signup successful. Response: ', res);
         // check response for token. if good, link to dashboard
-        return navigate('/dashboard', { props: res });
+        return navigate('/dashboard', { state: { user: res.data } });
       })
       .catch((err) => {
         console.log('my post error catcher', err);

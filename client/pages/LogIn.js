@@ -25,7 +25,7 @@ export default function LogIn() {
       .post('/api/login', formData)
       .then((res) => {
         console.log('login successful. Response: ', res);
-        return navigate('/dashboard', { props: res });
+        return navigate('/dashboard', { state: { user: res.data } });
       })
       .catch((err) => {
         console.log('login error', err);

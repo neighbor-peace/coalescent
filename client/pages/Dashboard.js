@@ -1,24 +1,22 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
+import { useLocation } from 'react-router-dom';
 
-class Dashboard extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
+function Dashboard() {
   //this.handleClick = this.handleClick.bind(this);
-  componentDidMount() {
-    // login or signup attaches cookie token
-    // request for state contains cookie token
-    // server serves proper state
-    // axios.get(/api/user)
-  }
-  render() {
-    return (
-      <>
-        <h1>Dashboard</h1>
-      </>
-    );
-  }
+  // login or signup attaches cookie token
+  // request for state contains cookie token
+  // server serves proper state
+  // axios.get(/api/user)
+  // this.setState({user: })
+  const location = useLocation();
+  const [userData, setUserData] = useState(location.state.user);
+  const [projectData, setProjectData] = useState();
+  console.log('user data', userData);
+  return (
+    <>
+      <h1>Dashboard</h1>
+    </>
+  );
 }
 export default Dashboard;
