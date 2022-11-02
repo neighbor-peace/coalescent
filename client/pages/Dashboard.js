@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Navbar from '../components/Navbar.jsx';
+import ProjectsContainer from '../containers/ProjectsContainer.jsx';
 
 function Dashboard() {
   const devState = {
@@ -12,7 +14,12 @@ function Dashboard() {
     _id: '63628278d4be152d1e888bac',
     __v: 0,
   };
-  const [userData, setUserData] = useState();
+  const [userData, setUserData] = useState({
+    username: '',
+    password: '',
+    firstName: '',
+    lastName: '',
+  });
   // const [userData, setUserData] = useState(devState);
   const [projectData, setProjectData] = useState();
   useEffect(() => {
@@ -37,7 +44,12 @@ function Dashboard() {
   // TODO: build out dashboard
   return (
     <>
-      <h1>Dashboard</h1>
+      <Navbar
+        username={userData.username}
+        firstName={userData.firstName}
+        lastName={userData.lastName}
+      />
+      <ProjectsContainer />
     </>
   );
 }
