@@ -34,6 +34,15 @@ router.get('/project', projectController.readProject, (req, res) => {
   return res.status(200).json(res.locals.projectArr);
 });
 
+router.patch(
+  '/project',
+  projectController.updateProject,
+  projectController.readProject,
+  (req, res) => {
+    return res.status(200).json(res.locals.projectArr);
+  }
+);
+
 router.delete(
   '/project',
   projectController.deleteProject,

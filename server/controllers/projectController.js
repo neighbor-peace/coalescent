@@ -32,6 +32,24 @@ const projectController = {
         return next({ log: `Error in projectController.readProject. ${err}` });
       });
   },
+  updateProject(req, res, next) {
+    console.log('updating project');
+    const { projectId, title } = req.body;
+    console.log(`will search for projectId: ${projectId}`);
+    Project.findOneAndUpdate({ _id: projectId }, { title }, { new: true })
+      .then((project) => {
+        if (project) {
+          console.log(`updated project: ${project}`);
+          return next();
+        } else
+          return next({
+            log: 'Error in projectController.updateProject. Project not found',
+          });
+      })
+      .catch((err) =>
+        next({ log: `Error in projectController.updateProject. ${err}` })
+      );
+  },
   deleteProject(req, res, next) {
     console.log('deleting project');
     const { projectId } = req.body;
