@@ -20,7 +20,7 @@ class App extends Component {
         <Routes>
           <Route
             path='/'
-            element={<SignUp />}
+            element={<LogIn />}
           />
           <Route
             path='/signup'

@@ -52,7 +52,10 @@ export default function SignUp() {
   const togglePwdIsHidden = () => setPwdIsHidden((prevState) => !prevState);
 
   return (
-    <section id='signup-page'>
+    <section
+      id='signup'
+      className='page'
+    >
       <form onSubmit={handleSubmit}>
         <label htmlFor='firstName'>Enter your first name</label>
         <input
@@ -116,7 +119,7 @@ export default function SignUp() {
             onChange={(e) => handleChange(e, 'team')}
           ></input>
         )}
-        <button>Submit</button>
+        <button>Sign Up</button>
       </form>
     </section>
   );

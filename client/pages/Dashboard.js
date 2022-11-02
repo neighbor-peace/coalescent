@@ -8,7 +8,7 @@ class Dashboard extends Component {
   }
   //this.handleClick = this.handleClick.bind(this);
   componentDidMount() {
-    // login attaches cookie token
+    // login or signup attaches cookie token
     // request for state contains cookie token
     // server serves proper state
     // axios.get(/api/user)
