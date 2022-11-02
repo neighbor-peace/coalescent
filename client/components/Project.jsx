@@ -1,7 +1,13 @@
 import React from 'react';
 import Task from './Task.jsx';
 
-export default function Project({ title, tasksArr, openTaskModal, projectId }) {
+export default function Project({
+  title,
+  tasksArr,
+  openTaskModal,
+  projectId,
+  openProjectEditor,
+}) {
   const tasks = tasksArr.map((task) => (
     <Task
       key={task._id}
@@ -16,6 +22,9 @@ export default function Project({ title, tasksArr, openTaskModal, projectId }) {
         <h1>{title}</h1>
         <button onClick={(e) => openTaskModal(projectId, title)}>
           Add task
+        </button>
+        <button onClick={(e) => openProjectEditor(projectId, title)}>
+          Edit Project
         </button>
       </div>
       {tasks}

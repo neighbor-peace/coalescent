@@ -3,6 +3,7 @@ import axios from 'axios';
 import Navbar from '../components/Navbar.jsx';
 import ProjectsContainer from '../containers/ProjectsContainer.jsx';
 import ProjectModal from '../modals/ProjectModal.jsx';
+import ProjectEditor from '../modals/ProjectEditor.jsx';
 import TaskModal from '../modals/TaskModal.jsx';
 
 function Dashboard() {
@@ -15,10 +16,16 @@ function Dashboard() {
   const [projectData, setProjectData] = useState([]);
   const [modalState, setModalState] = useState({
     projectModal: false,
+    projectEditor: {
+      isOpen: false,
+      projectId: '',
+      projectTitle: '',
+    },
     taskModal: {
       isOpen: false,
       activeProject: '',
     },
+    taskEditor: false,
   });
   // fetches state on componentDidMount
   useEffect(() => {
@@ -66,6 +73,27 @@ function Dashboard() {
       },
     }));
 
+  const openProjectEditor = (projectId, projectTitle) => {
+    setModalState((prevState) => ({
+      ...prevState,
+      projectEditor: {
+        isOpen: true,
+        projectId,
+        projectTitle,
+      },
+    }));
+  };
+  const closeProjectEditor = () => {
+    setModalState((prevState) => ({
+      ...prevState,
+      projectEditor: {
+        isOpen: false,
+        projectId: '',
+        projectTitle: '',
+      },
+    }));
+  };
+
   function createProject(formData) {
     closeProjectModal();
     axios
@@ -83,6 +111,28 @@ function Dashboard() {
       });
   }
 
+  function updateProject(formData) {
+    closeProjectEditor();
+    axios
+      .patch('/api/project', { ...formData })
+      .then((res) => {
+        console.log('project successfully updated');
+        setProjectData(res.data);
+      })
+      .catch((err) => console.log(err));
+  }
+
+  function deleteProject(projectId) {
+    closeProjectEditor();
+    axios
+      .delete('/api/project', { data: { projectId } })
+      .then((res) => {
+        console.log('project deleted successfully');
+        setProjectData(res.data);
+      })
+      .catch((err) => console.log(`Error in deleteProject. ${err}`));
+  }
+
   function pushTask(formData) {
     closeTaskModal();
     console.log('pushing task with form data: ', formData);
@@ -97,6 +147,7 @@ function Dashboard() {
   // TODO: IMPLEMENT openProjectModal AND createProject funcs
   return (
     <>
+      {/* MODALS */}
       {modalState.projectModal && (
         <ProjectModal
           createProject={createProject}
@@ -111,6 +162,17 @@ function Dashboard() {
           pushTask={pushTask}
         />
       )}
+      {modalState.projectEditor.isOpen && (
+        <ProjectEditor
+          projectId={modalState.projectEditor.projectId}
+          projectTitle={modalState.projectEditor.projectTitle}
+          updateProject={updateProject}
+          deleteProject={deleteProject}
+          closeProjectEditor={closeProjectEditor}
+        />
+      )}
+
+      {/* COMPONENTS */}
       <Navbar
         username={userData.username}
         firstName={userData.firstName}
@@ -120,6 +182,7 @@ function Dashboard() {
       <ProjectsContainer
         projectData={projectData}
         openTaskModal={openTaskModal}
+        openProjectEditor={openProjectEditor}
       />
     </>
   );

@@ -34,9 +34,13 @@ const projectController = {
   },
   updateProject(req, res, next) {
     console.log('updating project');
-    const { projectId, title } = req.body;
+    const { projectId, projectTitle } = req.body;
     console.log(`will search for projectId: ${projectId}`);
-    Project.findOneAndUpdate({ _id: projectId }, { title }, { new: true })
+    Project.findOneAndUpdate(
+      { _id: projectId },
+      { title: projectTitle },
+      { new: true }
+    )
       .then((project) => {
         if (project) {
           console.log(`updated project: ${project}`);
@@ -52,6 +56,7 @@ const projectController = {
   },
   deleteProject(req, res, next) {
     console.log('deleting project');
+    console.log('req.body', req.body);
     const { projectId } = req.body;
     console.log(`will search for projectId: ${projectId}`);
     Project.findOneAndDelete({ _id: projectId })

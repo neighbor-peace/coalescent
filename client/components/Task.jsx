@@ -3,8 +3,8 @@ import React from 'react';
 export default function Task({ title, description, team }) {
   return (
     <>
-      <h1>{title}</h1>
-      <h2>{team}</h2>
+      <h2>{title}</h2>
+      <h3>{team}</h3>
       <p>{description}</p>
       {/* TODO: ADD BUTTON TO COMPLETE TASK */}
     </>
