@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 export default function LogIn() {
   const initialFormState = {
@@ -8,6 +10,7 @@ export default function LogIn() {
   const [formData, setFormData] = useState(initialFormState);
   const [loginFailed, setLoginFailed] = useState(false);
   const [pwdIsHidden, setPwdIsHidden] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     console.log({ formData, loginFailed, pwdIsHidden });
@@ -18,6 +21,15 @@ export default function LogIn() {
     e.preventDefault();
     // TODO: FINISH LOGIN SUBMIT HANDLER
     // send combo to route handler
+    axios
+      .post('/api/login', formData)
+      .then((res) => {
+        console.log('login successful. Response: ', res);
+        return navigate('/dashboard', { props: res });
+      })
+      .catch((err) => {
+        console.log('login error', err);
+      });
     // if successful, reroute
     // if unsuccessful, set loginFailed
   }

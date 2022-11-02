@@ -19,11 +19,11 @@ export default function SignUp() {
     e.preventDefault();
     axios
       .post('/api/signup', formData)
-      .then((response) => {
+      .then((res) => {
         setFormData(initialFormState);
-        console.log('signup successful', response);
+        console.log('signup successful. Response: ', res);
         // check response for token. if good, link to dashboard
-        return navigate('/dashboard');
+        return navigate('/dashboard', { props: res });
       })
       .catch((err) => {
         console.log('my post error catcher', err);
