@@ -22,8 +22,13 @@ router.post(
   }
 );
 
+// TODO: set project owner from cookie data
 router.post('/project', projectController.createProject, (req, res) => {
   return res.status(200).json(res.locals.project);
+});
+
+router.get('/project', projectController.readProject, (req, res) => {
+  return res.status(200).json(res.locals.projectArr);
 });
 
 router.post('/task', projectController.pushTask, (req, res) => {

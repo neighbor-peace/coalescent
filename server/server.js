@@ -1,8 +1,10 @@
 const express = require('express');
-const app = express();
 const path = require('path');
+const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 const apiRouter = require('./routes/api.js');
+
+const app = express();
 // 'mongodb://localhost:27017/dev'
 const mongoURI = 'mongodb://localhost:27017/project-solo-dev';
 mongoose
@@ -12,6 +14,7 @@ mongoose
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 // /api/signup?isAdmin=true
 

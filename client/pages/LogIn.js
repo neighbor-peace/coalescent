@@ -29,6 +29,7 @@ export default function LogIn() {
       })
       .catch((err) => {
         console.log('login error', err);
+        setLoginFailed(true);
       });
     // if successful, reroute
     // if unsuccessful, set loginFailed

@@ -15,6 +15,22 @@ const projectController = {
         next({ log: `Error in projectController.createProject: ${err}` })
       );
   },
+  readProject(req, res, next) {
+    console.log('reading project');
+    console.log('cookies on req', req.cookies);
+    const owner_id = req.cookies.id;
+    console.log(`searching for project with id: ${owner_id}`);
+    Project.find({ owner_id })
+      .then((projects) => {
+        // handle empty array on client side
+        console.log(`found projects: ${projects}`);
+        res.locals.projectArr = projects;
+        return next();
+      })
+      .catch((err) => {
+        return next({ log: `Error in projectController.readProject. ${err}` });
+      });
+  },
   pushTask: async (req, res, next) => {
     console.log('pushing task');
     const { projectId, title, description, team } = req.body;

@@ -11,7 +11,7 @@ class App extends Component {
         <nav>
           <ul>
             <li>
-              <Link to='/'>Log In</Link>
+              <Link to='/login'>Log In</Link>
               <Link to='/signup'>Sign Up</Link>
               <Link to='/dashboard'>Dashboard</Link>
             </li>
@@ -20,7 +20,7 @@ class App extends Component {
         <Routes>
           <Route
             path='/'
-            element={<LogIn />}
+            element={<Dashboard />}
           />
           <Route
             path='/signup'
@@ -29,6 +29,10 @@ class App extends Component {
           <Route
             path='/dashboard'
             element={<Dashboard />}
+          />
+          <Route
+            path='/login'
+            element={<LogIn />}
           />
         </Routes>
       </>

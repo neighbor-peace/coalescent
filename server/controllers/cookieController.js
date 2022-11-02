@@ -10,7 +10,7 @@ const cookieController = {
     }
     console.log('setting token with local data: ', res.locals.user.id);
     res.cookie('id', res.locals.user.id, {
-      expires: new Date(Date.now() + 900000),
+      expires: new Date(Date.now() + 90000000),
       httpOnly: true,
     });
     return next();
