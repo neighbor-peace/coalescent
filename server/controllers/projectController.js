@@ -32,6 +32,24 @@ const projectController = {
         return next({ log: `Error in projectController.readProject. ${err}` });
       });
   },
+  deleteProject(req, res, next) {
+    console.log('deleting project');
+    const { projectId } = req.body;
+    console.log(`will search for projectId: ${projectId}`);
+    Project.findOneAndDelete({ _id: projectId })
+      .then((project) => {
+        if (project) {
+          console.log(`found and will delete project: ${project}`);
+          return next();
+        } else
+          return next({
+            log: `Error in projectController.findOneAndDelete. Project not found`,
+          });
+      })
+      .catch((err) =>
+        next({ log: `Error in projectController.findOneAndDelete. ${err}` })
+      );
+  },
   pushTask: async (req, res, next) => {
     console.log('pushing task');
     const { projectId, title, description, team } = req.body;

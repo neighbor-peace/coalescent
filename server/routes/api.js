@@ -26,7 +26,6 @@ router.get('/user', userController.readUser, (req, res) => {
   return res.status(200).json(res.locals.user);
 });
 
-// TODO: set project owner from cookie data
 router.post('/project', projectController.createProject, (req, res) => {
   return res.status(200).json(res.locals.project);
 });
@@ -34,6 +33,15 @@ router.post('/project', projectController.createProject, (req, res) => {
 router.get('/project', projectController.readProject, (req, res) => {
   return res.status(200).json(res.locals.projectArr);
 });
+
+router.delete(
+  '/project',
+  projectController.deleteProject,
+  projectController.readProject,
+  (req, res) => {
+    return res.status(200).json(res.locals.projectArr);
+  }
+);
 
 router.post(
   '/task',
