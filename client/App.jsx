@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Link, Route, Routes } from 'react-router-dom';
-import SignUp from './pages/SignUp';
-import LogIn from './pages/LogIn';
-import Dashboard from './pages/Dashboard';
+import SignUp from './pages/SignUp.jsx';
+import LogIn from './pages/LogIn.jsx';
+import Dashboard from './pages/Dashboard.jsx';
 
 class App extends Component {
   render() {
@@ -27,7 +27,7 @@ class App extends Component {
             element={<SignUp />}
           />
           <Route
-            path='/dashboard'
+            path='/dashboard/'
             element={<Dashboard />}
           />
           <Route
