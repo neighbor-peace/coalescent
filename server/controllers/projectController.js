@@ -4,10 +4,11 @@ const Project = require('../models/projectModel');
 const projectController = {
   createProject(req, res, next) {
     console.log('creating project');
-    const { title, owner_id } = req.body;
+    const { title } = req.body;
+    const owner_id = req.cookies.id;
     Project.create({ title, owner_id })
       .then((project) => {
-        console.log(`Project created: ${project}`);
+        console.log(`Project created`);
         res.locals.project = project;
         return next();
       })
@@ -23,7 +24,7 @@ const projectController = {
     Project.find({ owner_id })
       .then((projects) => {
         // handle empty array on client side
-        console.log(`found projects: ${projects}`);
+        console.log(`found projects`);
         res.locals.projectArr = projects;
         return next();
       })
@@ -40,9 +41,9 @@ const projectController = {
         console.log('project not found');
         next({ log: 'Error in projectController.pushTask: project not found' });
       }
-      console.log(`found project: ${currentProject}`);
+      console.log(`found project`);
       currentProject.tasks.push({ title, description, team });
-      console.log(`Task pushed. Current tasks: ${currentProject.tasks}`);
+      console.log(`Task pushed`);
       await currentProject.save();
       console.log(`current project updated succesfully`);
       res.locals.project = currentProject;

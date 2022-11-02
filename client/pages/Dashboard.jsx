@@ -35,10 +35,21 @@ function Dashboard() {
   const openCreateProject = () => setCreateProjectIsOpen(true);
   const closeCreateProject = () => setCreateProjectIsOpen(false);
 
-  function createProject() {
-    axios.post('/api/project', {
-      //insert data
-    });
+  function createProject(formData) {
+    axios
+      .post('/api/project', {
+        title: formData.title,
+      })
+      .then((res) => {
+        console.log('project created successfully');
+        setProjectData((prevState) => {
+          return [...prevState, res.data];
+        });
+        return closeCreateProject();
+      })
+      .catch((err) => {
+        console.log(`Error in createProject. ${err}`);
+      });
   }
   // TODO: IMPLEMENT openCreateProject AND createProject funcs
   return (
