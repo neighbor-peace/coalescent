@@ -4,6 +4,7 @@ const path = require('path');
 const mongoose = require('mongoose');
 const userController = require('./controllers/userController');
 const projectController = require('./controllers/projectController');
+const cookieController = require('./controllers/cookieController');
 
 // 'mongodb://localhost:27017/dev'
 const mongoURI = 'mongodb://localhost:27017/project-solo-dev';
@@ -22,10 +23,23 @@ app.get('/api', (req, res) => {
 // /api/signup?isAdmin=true
 // TODO: Stretch: Add competent authorization
 // TODO: add cookie simulating JWT
-// TODO: Reroute to homepage
-app.post('/api/signup', userController.createUser, (req, res) => {
-  return res.status(200).json(res.locals.user);
-});
+app.post(
+  '/api/signup',
+  userController.createUser,
+  cookieController.setToken,
+  (req, res) => {
+    return res.status(200).json(res.locals.user);
+  }
+);
+
+app.post(
+  '/api/login',
+  userController.verifyUser,
+  cookieController.setToken,
+  (req, res) => {
+    return res.status(200).json(res.locals.user);
+  }
+);
 
 app.post('/api/project', projectController.createProject, (req, res) => {
   return res.status(200).json(res.locals.project);
