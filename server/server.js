@@ -2,10 +2,7 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const mongoose = require('mongoose');
-const userController = require('./controllers/userController');
-const projectController = require('./controllers/projectController');
-const cookieController = require('./controllers/cookieController');
-
+const apiRouter = require('./routes/api.js');
 // 'mongodb://localhost:27017/dev'
 const mongoURI = 'mongodb://localhost:27017/project-solo-dev';
 mongoose
@@ -16,38 +13,10 @@ mongoose
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.get('/api', (req, res) => {
-  return res.status(200).json({ log: 'Server is working' });
-});
-
 // /api/signup?isAdmin=true
-// TODO: Stretch: Add competent authorization
-// TODO: add cookie simulating JWT
-app.post(
-  '/api/signup',
-  userController.createUser,
-  cookieController.setToken,
-  (req, res) => {
-    return res.status(200).json(res.locals.user);
-  }
-);
 
-app.post(
-  '/api/login',
-  userController.verifyUser,
-  cookieController.setToken,
-  (req, res) => {
-    return res.status(200).json(res.locals.user);
-  }
-);
-
-app.post('/api/project', projectController.createProject, (req, res) => {
-  return res.status(200).json(res.locals.project);
-});
-
-app.post('/api/task', projectController.pushTask, (req, res) => {
-  return res.status(200).json(res.locals.project);
-});
+//
+app.use('/api', apiRouter);
 
 app.use((err, req, res, next) => {
   const defaultErr = {

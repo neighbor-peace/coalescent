@@ -17,7 +17,6 @@ class Dashboard extends Component {
     return (
       <>
         <h1>Dashboard</h1>
-        <button onClick={testBackend}>Test Backend</button>
       </>
     );
   }
