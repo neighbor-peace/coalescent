@@ -19,13 +19,11 @@ export default function LogIn() {
   const togglePwdIsHidden = () => setPwdIsHidden((prevState) => !prevState);
   function handleSubmit(e) {
     e.preventDefault();
-    // TODO: FINISH LOGIN SUBMIT HANDLER
-    // send combo to route handler
     axios
       .post('/api/login', formData)
       .then((res) => {
         console.log('login successful. Response: ', res);
-        return navigate('/dashboard', { state: { user: res.data } });
+        return navigate('/dashboard');
       })
       .catch((err) => {
         console.log('login error', err);

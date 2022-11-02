@@ -19,6 +19,26 @@ const userController = {
         });
       });
   },
+  readUser(req, res, next) {
+    console.log('reading user');
+    const _id = req.cookies.id;
+    console.log(`searching for user with id: ${_id}`);
+    User.findOne({ _id })
+      .then((user) => {
+        if (user) {
+          console.log(`user found: ${user}`);
+          res.locals.user = user;
+          return next();
+        } else {
+          return next({
+            log: 'Error in userController.readUser: User not found',
+          });
+        }
+      })
+      .catch((err) =>
+        next({ log: `Error in userController.readUser. ${err}` })
+      );
+  },
   verifyUser(req, res, next) {
     console.log('verifying user');
     const { username, password } = req.body;

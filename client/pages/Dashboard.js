@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useLocation } from 'react-router-dom';
 
 function Dashboard() {
   const devState = {
@@ -13,17 +12,27 @@ function Dashboard() {
     _id: '63628278d4be152d1e888bac',
     __v: 0,
   };
-  const location = useLocation();
-  // const [userData, setUserData] = useState(location.state.user);
-  const [userData, setUserData] = useState(devState);
+  const [userData, setUserData] = useState();
+  // const [userData, setUserData] = useState(devState);
   const [projectData, setProjectData] = useState();
-  console.log('user data', userData);
   useEffect(() => {
-    axios.get('/api/project').then((res) => {
-      // set state with project data
-      console.log('project data found', res);
-    });
+    async function fetchState() {
+      try {
+        const userRes = await axios.get('/api/user');
+        const projectRes = await axios.get('/api/project');
+        setUserData(userRes.data);
+        setProjectData(projectRes.data);
+      } catch (err) {
+        console.log(`error fetching state: ${err}`);
+      }
+    }
+    fetchState();
   }, []);
+
+  useEffect(() => {
+    console.log('Latest state');
+    console.log({ userData, projectData });
+  });
 
   // TODO: build out dashboard
   return (

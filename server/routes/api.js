@@ -22,6 +22,10 @@ router.post(
   }
 );
 
+router.get('/user', userController.readUser, (req, res) => {
+  return res.status(200).json(res.locals.user);
+});
+
 // TODO: set project owner from cookie data
 router.post('/project', projectController.createProject, (req, res) => {
   return res.status(200).json(res.locals.project);

@@ -23,7 +23,7 @@ export default function SignUp() {
         setFormData(initialFormState);
         console.log('signup successful. Response: ', res);
         // check response for token. if good, link to dashboard
-        return navigate('/dashboard', { state: { user: res.data } });
+        return navigate('/dashboard');
       })
       .catch((err) => {
         console.log('my post error catcher', err);
@@ -84,7 +84,6 @@ export default function SignUp() {
         />
 
         <label htmlFor='password'>Enter your password</label>
-        {/* TODO: ADD BUTTON TO CHANGE WHETHER PW IS HIDDEN (INPUT TYPE) */}
         <input
           id='password'
           type={pwdIsHidden ? 'password' : 'text'}
