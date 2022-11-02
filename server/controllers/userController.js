@@ -4,8 +4,7 @@ const User = require('../models/userModel');
 const userController = {
   createUser(req, res, next) {
     console.log('creating user');
-    const { username, password, firstName, lastName, team } = req.body;
-    const { isAdmin } = req.query;
+    const { username, password, firstName, lastName, team, isAdmin } = req.body;
     User.create({ username, password, firstName, lastName, isAdmin, team })
       .then((user) => {
         console.log(`User created: ${user}`);
@@ -13,7 +12,10 @@ const userController = {
         return next();
       })
       .catch((err) => {
-        return next({ log: `Error in userController.createUser: ${err}` });
+        return next({
+          status: 409,
+          log: `Error in userController.createUser: ${err}`,
+        });
       });
   },
 };

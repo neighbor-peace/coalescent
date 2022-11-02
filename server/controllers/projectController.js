@@ -4,8 +4,8 @@ const Project = require('../models/projectModel');
 const projectController = {
   createProject(req, res, next) {
     console.log('creating project');
-    const { title } = req.body;
-    Project.create({ title })
+    const { title, owner_id } = req.body;
+    Project.create({ title, owner_id })
       .then((project) => {
         console.log(`Project created: ${project}`);
         res.locals.project = project;

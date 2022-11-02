@@ -6,7 +6,7 @@ const userController = require('./controllers/userController');
 const projectController = require('./controllers/projectController');
 
 // 'mongodb://localhost:27017/dev'
-const mongoURI = 'mongodb://localhost:27017/dev';
+const mongoURI = 'mongodb://localhost:27017/project-solo-dev';
 mongoose
   .connect(mongoURI)
   .then(() => console.log('Connected to MongoDB'))
@@ -31,7 +31,6 @@ app.post('/api/project', projectController.createProject, (req, res) => {
   return res.status(200).json(res.locals.project);
 });
 
-// TODO: create task route handler
 app.post('/api/task', projectController.pushTask, (req, res) => {
   return res.status(200).json(res.locals.project);
 });

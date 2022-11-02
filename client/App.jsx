@@ -1,23 +1,37 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import { Link, Route, Routes } from 'react-router-dom';
+import SignUp from './pages/SignUp';
+import LogIn from './pages/LogIn';
+import Dashboard from './pages/Dashboard';
 
 class App extends Component {
   render() {
-    function testBackend() {
-      axios
-        .get('/api')
-        .then((response) => {
-          console.log({ response });
-        })
-        .catch((err) => {
-          console.log({ err });
-        });
-    }
     return (
-      <div>
-        <h1>Hello World!</h1>
-        <button onClick={testBackend}>Test Backend</button>
-      </div>
+      <>
+        <nav>
+          <ul>
+            <li>
+              <Link to='/'>Log In</Link>
+              <Link to='/signup'>Sign Up</Link>
+              <Link to='/dashboard'>Dashboard</Link>
+            </li>
+          </ul>
+        </nav>
+        <Routes>
+          <Route
+            path='/'
+            element={<SignUp />}
+          />
+          <Route
+            path='/signup'
+            element={<SignUp />}
+          />
+          <Route
+            path='/dashboard'
+            element={<Dashboard />}
+          />
+        </Routes>
+      </>
     );
   }
 }
