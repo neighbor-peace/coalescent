@@ -21,7 +21,7 @@ function Dashboard() {
     lastName: '',
   });
   // const [userData, setUserData] = useState(devState);
-  const [projectData, setProjectData] = useState();
+  const [projectData, setProjectData] = useState([]);
   useEffect(() => {
     async function fetchState() {
       try {
@@ -49,7 +49,7 @@ function Dashboard() {
         firstName={userData.firstName}
         lastName={userData.lastName}
       />
-      <ProjectsContainer />
+      <ProjectsContainer projectData={projectData} />
     </>
   );
 }
