@@ -9,11 +9,11 @@ const taskSchema = new Schema({
 });
 
 const projectSchema = new Schema({
-  owner_id: {
-    type: Schema.Types.ObjectId,
-    ref: 'user',
-    required: true,
-  },
+  // owner_id: {
+  //   type: Schema.Types.ObjectId,
+  //   ref: 'user',
+  //   required: true,
+  // },
   title: { type: String, required: true, unique: true },
   tasks: [taskSchema],
 });

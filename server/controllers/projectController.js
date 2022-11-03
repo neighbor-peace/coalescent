@@ -5,8 +5,8 @@ const projectController = {
   createProject(req, res, next) {
     console.log('creating project');
     const { title } = req.body;
-    const owner_id = req.cookies.id;
-    Project.create({ title, owner_id })
+    // const owner_id = req.cookies.id;
+    Project.create({ title })
       .then((project) => {
         console.log(`Project created`);
         res.locals.project = project;
@@ -19,9 +19,9 @@ const projectController = {
   readProject(req, res, next) {
     console.log('reading project');
     console.log('cookies on req', req.cookies);
-    const owner_id = req.cookies.id;
-    console.log(`searching for project with id: ${owner_id}`);
-    Project.find({ owner_id })
+    // const owner_id = req.cookies.id;
+    console.log(`searching for projects`);
+    Project.find({})
       .then((projects) => {
         // handle empty array on client side
         console.log(`found projects`);

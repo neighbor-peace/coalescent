@@ -7,6 +7,8 @@ export default function ProjectsContainer({
   openProjectEditor,
   openTaskEditor,
   deleteTask,
+  isAdmin,
+  userTeam,
 }) {
   const projects = projectData.map((project) => (
     <Project
@@ -18,6 +20,8 @@ export default function ProjectsContainer({
       openProjectEditor={openProjectEditor}
       openTaskEditor={openTaskEditor}
       deleteTask={deleteTask}
+      isAdmin={isAdmin}
+      userTeam={userTeam}
     />
   ));
   return <section id='project-container'>{projects}</section>;

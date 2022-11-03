@@ -5,6 +5,7 @@ export default function Navbar({
   firstName,
   lastName,
   openProjectModal,
+  isAdmin,
 }) {
   return (
     <section id='navbar'>
@@ -13,7 +14,9 @@ export default function Navbar({
       </p>
       <nav>
         <h1>Logo</h1>
-        <button onClick={openProjectModal}>Create New Project</button>
+        {isAdmin && (
+          <button onClick={openProjectModal}>Create New Project</button>
+        )}
         <div id='user-profile'>
           <img />
           <span>{username}</span>

@@ -14,6 +14,8 @@ function Dashboard() {
     password: '',
     firstName: '',
     lastName: '',
+    isAdmin: false,
+    team: '',
   });
   const [projectData, setProjectData] = useState([]);
   const [modalState, setModalState] = useState({
@@ -245,6 +247,7 @@ function Dashboard() {
         firstName={userData.firstName}
         lastName={userData.lastName}
         openProjectModal={openProjectModal}
+        isAdmin={userData.isAdmin}
       />
       <ProjectsContainer
         projectData={projectData}
@@ -252,6 +255,8 @@ function Dashboard() {
         openProjectEditor={openProjectEditor}
         openTaskEditor={openTaskEditor}
         deleteTask={deleteTask}
+        isAdmin={userData.isAdmin}
+        userTeam={userData.team}
       />
     </section>
   );

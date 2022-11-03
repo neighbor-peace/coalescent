@@ -9,7 +9,12 @@ export default function Project({
   openProjectEditor,
   openTaskEditor,
   deleteTask,
+  isAdmin,
+  userTeam,
 }) {
+  if (!isAdmin) {
+    tasksArr = tasksArr.filter((task) => task.team === userTeam);
+  }
   const tasks = tasksArr.map((task) => (
     <Task
       key={task._id}
@@ -20,18 +25,23 @@ export default function Project({
       projectId={projectId}
       taskId={task._id}
       deleteTask={deleteTask}
+      isAdmin={isAdmin}
     />
   ));
   return (
     <div className='project'>
       <div>
         <h1>{title}</h1>
-        <button onClick={(e) => openTaskModal(projectId, title)}>
-          Add task
-        </button>
-        <button onClick={(e) => openProjectEditor(projectId, title)}>
-          Edit Project
-        </button>
+        {isAdmin && (
+          <button onClick={(e) => openTaskModal(projectId, title)}>
+            Add task
+          </button>
+        )}
+        {isAdmin && (
+          <button onClick={(e) => openProjectEditor(projectId, title)}>
+            Edit Project
+          </button>
+        )}
       </div>
       {tasks}
     </div>

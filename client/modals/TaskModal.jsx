@@ -37,8 +37,8 @@ export default function TaskModal({
         <textarea
           name='taskDescription'
           id='taskDescription'
-          cols='30'
-          rows='10'
+          // cols='30'
+          // rows='10'
           value={formData.description}
           onChange={(e) => updateForm(e, 'description')}
         ></textarea>

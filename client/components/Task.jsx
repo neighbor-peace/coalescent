@@ -8,17 +8,20 @@ export default function Task({
   projectId,
   taskId,
   deleteTask,
+  isAdmin,
 }) {
   return (
     <div className='task'>
       <h2>{title}</h2>
-      <button
-        onClick={() =>
-          openTaskEditor({ title, description, team, projectId, taskId })
-        }
-      >
-        Edit Task
-      </button>
+      {isAdmin && (
+        <button
+          onClick={() =>
+            openTaskEditor({ title, description, team, projectId, taskId })
+          }
+        >
+          Edit Task
+        </button>
+      )}
       <h3>{team}</h3>
       <p>{description}</p>
       <button onClick={() => deleteTask(projectId, taskId)}>
