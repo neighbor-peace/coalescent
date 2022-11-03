@@ -4,6 +4,7 @@ import SignUp from './pages/SignUp.jsx';
 import LogIn from './pages/LogIn.jsx';
 import Dashboard from './pages/Dashboard.jsx';
 import axios from 'axios';
+import { Spinner } from '@fluentui/react-components';
 
 class App extends Component {
   constructor(props) {
@@ -23,12 +24,16 @@ class App extends Component {
     const { isLoggedIn } = this.state;
     return (
       <>
-        {this.state.hasLoaded || <h1>Loading</h1>}
+        {this.state.hasLoaded || (
+          <div id='spinner'>
+            <Spinner size='huge' />
+          </div>
+        )}
         {this.state.hasLoaded && (
           <Routes>
             <Route
               path='/'
-              element={isLoggedIn ? <Dashboard /> : <SignUp />}
+              element={isLoggedIn ? <Dashboard /> : <LogIn />}
             />
             <Route
               path='/signup'

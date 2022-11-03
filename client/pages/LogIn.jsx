@@ -44,38 +44,48 @@ export default function LogIn() {
       id='login'
       className='page'
     >
-      <form onSubmit={handleSubmit}>
-        <label htmlFor='username'>Enter your username</label>
-        <input
-          id='username'
-          type='text'
-          value={formData.username}
-          onChange={(e) => handleChange(e, 'username')}
-          placeholder='USERNAME'
-        />
-        <label htmlFor='password'>Enter your password</label>
-        <div>
-          <input
-            id='password'
-            type={pwdIsHidden ? 'password' : 'text'}
-            value={formData.password}
-            onChange={(e) => handleChange(e, 'password')}
-            placeholder='PASSWORD'
-          />
-
-          <button
-            type='button'
-            onClick={togglePwdIsHidden}
-          >
-            {pwdIsHidden ? 'Show Password' : 'Hide Password'}
-          </button>
-        </div>
-        <button className='submit'>Log In</button>
-      </form>
-      {loginFailed && <p>Incorrect username or password</p>}
-      <p>
-        Need an account? <Link to='/signup'>Sign Up</Link>
-      </p>
+      <div>
+        <h1>Log In</h1>
+        <form onSubmit={handleSubmit}>
+          <div>
+            <input
+              id='username'
+              type='text'
+              value={formData.username}
+              onChange={(e) => handleChange(e, 'username')}
+              placeholder='USERNAME'
+            />
+          </div>
+          <div>
+            <input
+              id='password'
+              type={pwdIsHidden ? 'password' : 'text'}
+              value={formData.password}
+              onChange={(e) => handleChange(e, 'password')}
+              placeholder='PASSWORD'
+            />
+            <button
+              type='button'
+              className='togglePwd'
+              onClick={togglePwdIsHidden}
+            >
+              {pwdIsHidden ? 'Show' : 'Hide'}
+            </button>
+          </div>
+          <button className='submit'>LOG IN</button>
+        </form>
+        {loginFailed || (
+          <div className='valErr'>
+            <p>Incorrect username or password</p>
+          </div>
+        )}
+        <p className='link'>
+          Need an account?{' '}
+          <Link to='/signup'>
+            <span>Sign Up</span>
+          </Link>
+        </p>
+      </div>
     </section>
   );
 }

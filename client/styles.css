@@ -1,161 +1,125 @@
-/* http://meyerweb.com/eric/tools/css/reset/ 
-   v2.0 | 20110126
-   License: none (public domain)
-*/
-
-html,
-body,
-div,
-span,
-applet,
-object,
-iframe,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-blockquote,
-pre,
-a,
-abbr,
-acronym,
-address,
-big,
-cite,
-code,
-del,
-dfn,
-em,
-img,
-ins,
-kbd,
-q,
-s,
-samp,
-small,
-strike,
-strong,
-sub,
-sup,
-tt,
-var,
-b,
-u,
-i,
-center,
-dl,
-dt,
-dd,
-ol,
-ul,
-li,
-fieldset,
-form,
-label,
-legend,
-table,
-caption,
-tbody,
-tfoot,
-thead,
-tr,
-th,
-td,
-article,
-aside,
-canvas,
-details,
-embed,
-figure,
-figcaption,
-footer,
-header,
-hgroup,
-menu,
-nav,
-output,
-ruby,
-section,
-summary,
-time,
-mark,
-audio,
-video {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-size: 100%;
-  font: inherit;
-  vertical-align: baseline;
-}
-/* HTML5 display-role reset for older browsers */
-article,
-aside,
-details,
-figcaption,
-figure,
-footer,
-header,
-hgroup,
-menu,
-nav,
-section {
-  display: block;
-}
-body {
-  line-height: 1;
-}
-ol,
-ul {
-  list-style: none;
-}
-blockquote,
-q {
-  quotes: none;
-}
-blockquote:before,
-blockquote:after,
-q:before,
-q:after {
-  content: '';
-  content: none;
-}
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-}
-
 /* GLOBAL */
+:root {
+  --primary-purple: #7600e8;
+  --secondary-orange: #ff6f6d;
+  --gray: #a1a6a9;
+  --light-gray: #f4f4f4;
+  --dark-gray: #828282;
+  --light-black: #3c4a55;
 
+  --input-height: 50px;
+}
+h1 {
+  font-size: 2rem;
+}
+/* APP.JSX */
+#spinner {
+  margin-top: 50vh;
+}
 /* PAGES */
 
 #login,
 #signup {
-  background-color: gray;
   height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:svgjs='http://svgjs.com/svgjs' width='600' height='1000' preserveAspectRatio='none' viewBox='0 0 600 1000'%3e%3cg mask='url(%26quot%3b%23SvgjsMask1120%26quot%3b)' fill='none'%3e%3crect width='600' height='1000' x='0' y='0' fill='rgba(118%2c 0%2c 232%2c 1)'%3e%3c/rect%3e%3cpath d='M0%2c440.88C83.296%2c438.901%2c161.399%2c405.243%2c230.913%2c359.308C299.777%2c313.803%2c354.677%2c252.458%2c394.531%2c180.176C436.796%2c103.521%2c473.633%2c20.203%2c465.96%2c-66.995C458.091%2c-156.413%2c407.501%2c-234.448%2c351.847%2c-304.877C294.128%2c-377.919%2c232.187%2c-462.205%2c140.577%2c-478.761C50.134%2c-495.107%2c-35.384%2c-436.302%2c-114.254%2c-389.115C-178.423%2c-350.723%2c-219.249%2c-288.902%2c-269.425%2c-233.458C-320.903%2c-176.576%2c-391.025%2c-132.928%2c-412.7%2c-59.337C-435.654%2c18.597%2c-421.328%2c103.18%2c-390.746%2c178.448C-359.331%2c255.768%2c-307.357%2c323.921%2c-238.075%2c370.452C-167.953%2c417.547%2c-84.445%2c442.887%2c0%2c440.88' fill='%235e00ba'%3e%3c/path%3e%3cpath d='M600 1495.26C692.378 1516.242 793.4259999999999 1474.981 866.5419999999999 1414.748 936.588 1357.0439999999999 952.9359999999999 1260.843 986.775 1176.634 1018.9300000000001 1096.614 1063.31 1020.061 1059.767 933.895 1056.019 842.7280000000001 1033.863 743.96 966.456 682.4639999999999 900.529 622.319 799.389 637.1610000000001 712.448 617.037 631.531 598.308 550.247 537.1800000000001 473.242 568.3009999999999 396.03999999999996 599.501 373.813 696.498 334.373 769.833 303.049 828.076 276.058 886.613 266.831 952.098 257.625 1017.434 258.177 1083.737 281.444 1145.48 305.781 1210.062 354.89 1258.066 401.36 1309.091 463.727 1377.571 509.677 1474.745 600 1495.26' fill='%238d17ff'%3e%3c/path%3e%3c/g%3e%3cdefs%3e%3cmask id='SvgjsMask1120'%3e%3crect width='600' height='1000' fill='white'%3e%3c/rect%3e%3c/mask%3e%3c/defs%3e%3c/svg%3e");
+}
+
+#login > div,
+#signup > div {
+  background-color: white;
+  /* height: 60vh; */
+  width: 85vw;
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px 5px #440083;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+}
+
+#login h1,
+#signup h1 {
+  margin-bottom: 40px;
 }
 
 #login form,
 #signup form {
-  background-color: white;
-  width: 80vw;
-  height: 50vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-#login input,
-#signup input {
-  width: 80%;
+input {
+  width: 75vw;
+  height: var(--input-height);
+  border-radius: 10px;
+  border-style: none;
+  background-color: var(--light-gray);
+  padding-left: 20px;
+  font-size: 1.3rem;
+}
+
+input::placeholder {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--dark-gray);
+}
+
+.inputContainer {
+  min-width: 100%;
+  max-width: 100%;
+  margin: 10px 0px;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  /* background-color: red; */
+  /* align-items: center; */
+}
+
+div.valErr {
+  display: flex;
+  height: 20px;
+  align-items: center;
+  color: var(--secondary-orange);
+}
+
+.togglePwd {
+  position: relative;
+  width: 50px;
+  left: -20px;
+  border-style: none;
+  background-color: transparent;
+}
+
+.password {
+  margin-right: -50px;
+}
+
+.submit {
+  width: 100%;
+  height: var(--input-height);
+  border-radius: 10px;
+  border-style: none;
+  background-color: var(--primary-purple);
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 900;
+}
+
+p.link {
+  color: var(--light-black);
+  font-weight: 800;
+}
+
+p.link span {
+  color: var(--primary-purple);
 }
 
 /* DASHBOARD */

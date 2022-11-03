@@ -4,3 +4,8 @@
 // TODO: put tasks route handlers in separate router
 // TODO: refactor modal state to be DRY
 TODO: add hashing function that takes team name and outputs color hex
+
+# Styling
+
+TODO: ICONS
+TODO: COLORFUL UNDERLINES

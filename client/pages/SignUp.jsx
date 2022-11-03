@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
+import { Switch } from '@fluentui/react-components';
 export default function SignUp() {
   const initialFormState = {
     firstName: '',
@@ -50,80 +51,92 @@ export default function SignUp() {
   }
 
   const togglePwdIsHidden = () => setPwdIsHidden((prevState) => !prevState);
-
   return (
     <section
       id='signup'
       className='page'
     >
-      <form onSubmit={handleSubmit}>
-        <label htmlFor='firstName'>Enter your first name</label>
-        <input
-          id='firstName'
-          type='text'
-          value={formData.firstName}
-          onChange={(e) => handleChange(e, 'firstName')}
-          placeholder='FIRST NAME'
-        />
+      <div>
+        <h1>Sign Up</h1>
+        <form onSubmit={handleSubmit}>
+          <div className='inputContainer'>
+            <input
+              className='firstName'
+              type='text'
+              value={formData.firstName}
+              onChange={(e) => handleChange(e, 'firstName')}
+              placeholder='FIRST NAME'
+            />
+          </div>
 
-        <label htmlFor='lastName'>Enter your last name</label>
-        <input
-          id='lastName'
-          type='text'
-          value={formData.lastName}
-          onChange={(e) => handleChange(e, 'lastName')}
-        />
-        {usernameIsTaken && (
-          <p>This username is taken. Please try a different username.</p>
-        )}
-        <label htmlFor='username'>Enter your username</label>
-        <input
-          id='username'
-          type='text'
-          value={formData.username}
-          onChange={(e) => handleChange(e, 'username')}
-        />
+          <div className='inputContainer'>
+            <input
+              className='lastName'
+              type='text'
+              value={formData.lastName}
+              onChange={(e) => handleChange(e, 'lastName')}
+              placeholder='LAST NAME'
+            />
+          </div>
+          {usernameIsTaken && (
+            <div className='valErr'>
+              <p>This username is taken</p>
+            </div>
+          )}
+          <div className='inputContainer'>
+            <input
+              className='username'
+              type='text'
+              value={formData.username}
+              onChange={(e) => handleChange(e, 'username')}
+              placeholder='USERNAME'
+            />
+          </div>
 
-        <label htmlFor='password'>Enter your password</label>
-        <input
-          id='password'
-          type={pwdIsHidden ? 'password' : 'text'}
-          value={formData.password}
-          onChange={(e) => handleChange(e, 'password')}
-        />
-        <button
-          type='button'
-          onClick={togglePwdIsHidden}
-        >
-          {pwdIsHidden ? 'Show Password' : 'Hide Password'}
-        </button>
+          <div className='inputContainer'>
+            <input
+              className='password'
+              type={pwdIsHidden ? 'password' : 'text'}
+              value={formData.password}
+              onChange={(e) => handleChange(e, 'password')}
+              placeholder='PASSWORD'
+            />
+            <button
+              type='button'
+              className='togglePwd'
+              onClick={togglePwdIsHidden}
+            >
+              {pwdIsHidden ? 'Show' : 'Hide'}
+            </button>
+          </div>
 
-        <label htmlFor='isAdmin'>
-          Are you creating a project manager account?
-        </label>
-        <input
-          id='isAdmin'
-          type='checkbox'
-          value={formData.isAdmin}
-          onChange={(e) => handleChange(e, 'isAdmin')}
-        ></input>
+          <Switch
+            labelPosition='before'
+            label='Create project manager account?'
+            checked={formData.isAdmin}
+            onChange={() => handleChange(null, 'isAdmin')}
+          />
 
-        {!formData.isAdmin && (
-          <label htmlFor='team'>Enter your team name</label>
-        )}
-        {!formData.isAdmin && (
-          <input
-            id='team'
-            type='text'
-            value={formData.team}
-            onChange={(e) => handleChange(e, 'team')}
-          ></input>
-        )}
-        <button className='submit'>Sign Up</button>
-      </form>
-      <p>
-        Already have an account? <Link to='/login'>Log In</Link>
-      </p>
+          {!formData.isAdmin && (
+            <div className='inputContainer'>
+              <input
+                className='team'
+                type='text'
+                value={formData.team}
+                onChange={(e) => handleChange(e, 'team')}
+                placeholder='TEAM NAME'
+              ></input>
+            </div>
+          )}
+          <button className='submit'>SIGN UP</button>
+        </form>
+        <p className='link'>
+          Already have an account?{' '}
+          <Link to='/login'>
+            <span>Log In</span>
+          </Link>
+        </p>
+      </div>
     </section>
   );
 }
