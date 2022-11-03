@@ -52,6 +52,22 @@ function Dashboard() {
     }
     fetchState();
   }, []);
+  // fetch project state every second if not an admin
+  useEffect(() => {
+    if (userData.isAdmin) return;
+    const timeoutId = setTimeout(() => {
+      axios
+        .get('/api/project')
+        .then((res) => {
+          setProjectData(res.data);
+        })
+        .catch((err) => console.log(err));
+    }, 1000);
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [projectData]);
+
   useEffect(() => {
     console.log('Latest state');
     console.log({ userData, projectData });

@@ -26,6 +26,8 @@ export default function CreateProject({ createProject, closeProjectModal }) {
           value={formData.title}
           onChange={updateForm}
         />
+        <label htmlFor='projectTeams'>Which teams are involved</label>
+        <input type='text' />
         <button
           type='button'
           onClick={closeProjectModal}
