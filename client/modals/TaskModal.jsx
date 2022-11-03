@@ -18,46 +18,53 @@ export default function TaskModal({
     }));
   }
   return (
-    <>
-      <h1>Add a task to {projectTitle}</h1>
+    <div className='modal'>
       <form
         onSubmit={(e) => {
           e.preventDefault();
           pushTask({ ...formData, projectId });
         }}
       >
-        <label htmlFor='taskTitle'>Enter a task title</label>
-        <input
-          id='taskTitle'
-          type='text'
-          value={formData.title}
-          onChange={(e) => updateForm(e, 'title')}
-        />
-        <label htmlFor='taskDescription'>Enter a task description</label>
-        <textarea
-          name='taskDescription'
-          id='taskDescription'
-          // cols='30'
-          // rows='10'
-          value={formData.description}
-          onChange={(e) => updateForm(e, 'description')}
-        ></textarea>
+        <h1>Add Task To {projectTitle}</h1>
+        <div className='input-container'>
+          <input
+            id='taskTitle'
+            type='text'
+            value={formData.title}
+            onChange={(e) => updateForm(e, 'title')}
+            placeholder='TITLE'
+          />
+        </div>
+        <div className='input-container'>
+          <input
+            name='taskDescription'
+            id='taskDescription'
+            // cols='30'
+            // rows='10'
+            value={formData.description}
+            onChange={(e) => updateForm(e, 'description')}
+            placeholder='DESCRIPTION'
+          />
+        </div>
         {/*  TODO: Change this to a dropdown, create teams in database */}
-        <label htmlFor='taskTeam'>Assign a team</label>
-        <input
-          id='taskTeam'
-          type='text'
-          value={formData.team}
-          onChange={(e) => updateForm(e, 'team')}
-        />
+        <div className='input-container'>
+          <input
+            id='taskTeam'
+            type='text'
+            value={formData.team}
+            onChange={(e) => updateForm(e, 'team')}
+            placeholder='TEAM'
+          />
+        </div>
+        <button className='submit'>Add task</button>
         <button
           type='button'
           onClick={closeTaskModal}
+          className='submit cancel'
         >
           Cancel
         </button>
-        <button>Add task</button>
       </form>
-    </>
+    </div>
   );
 }

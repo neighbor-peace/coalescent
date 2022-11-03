@@ -22,46 +22,54 @@ export default function TaskEditor({
     }));
   }
   return (
-    <>
-      <h1>Edit the task</h1>
+    <div className='modal'>
       <form
         onSubmit={(e) => {
           e.preventDefault();
           updateTask({ ...formData, projectId, taskId });
         }}
       >
-        <label htmlFor='editTaskTitle'>Edit task title</label>
-        <input
-          type='text'
-          value={formData.title}
-          onChange={(e) => updateForm(e, 'title')}
-        />
-        <label htmlFor='editTaskDescription'>Edit task description</label>
-        <textarea
-          type='text'
-          value={formData.description}
-          onChange={(e) => updateForm(e, 'description')}
-        ></textarea>
-        <label htmlFor='editTaskTeam'>Edit task team</label>
-        <input
-          type='text'
-          value={formData.team}
-          onChange={(e) => updateForm(e, 'team')}
-        />
-        <button
-          type='button'
-          onClick={() => deleteTask(projectId, taskId)}
-        >
-          Delete Task
-        </button>
+        <h1>Edit Task</h1>
+        <div className='input-container'>
+          <input
+            type='text'
+            value={formData.title}
+            onChange={(e) => updateForm(e, 'title')}
+            placeholder='TITLE'
+          />
+        </div>
+        <div className='input-container'>
+          <input
+            type='text'
+            value={formData.description}
+            onChange={(e) => updateForm(e, 'description')}
+            placeholder='DESCRIPTION'
+          />
+        </div>
+        <div className='input-container'>
+          <input
+            type='text'
+            value={formData.team}
+            onChange={(e) => updateForm(e, 'team')}
+            placeholder='TEAM'
+          />
+        </div>
+        <button className='submit'>Submit Changes</button>
         <button
           type='button'
           onClick={closeTaskEditor}
+          className='submit cancel'
         >
           Cancel
         </button>
-        <button>Submit Changes</button>
+        <button
+          type='button'
+          onClick={() => deleteTask(projectId, taskId)}
+          className='submit delete'
+        >
+          Delete Task
+        </button>
       </form>
-    </>
+    </div>
   );
 }

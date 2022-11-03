@@ -62,17 +62,12 @@ h3 {
   margin-bottom: 40px;
 }
 
-#login form,
-#signup form {
+form {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-
-/* #login form {
-  max-width: 90%;
-} */
 
 input {
   width: 75vw;
@@ -90,7 +85,7 @@ input::placeholder {
   color: var(--dark-gray);
 }
 
-.inputContainer {
+.input-container {
   min-width: 100%;
   max-width: 100%;
   margin: 10px 0px;
@@ -121,7 +116,7 @@ div.valErr {
 }
 
 .submit {
-  width: 100%;
+  width: 80vw;
   height: var(--input-height);
   border-radius: 10px;
   border-style: none;
@@ -282,4 +277,43 @@ p.link span {
 
 .task button {
   margin: 10px 0;
+}
+
+/* MODALS */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.233);
+  z-index: 9;
+
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal h1 {
+  max-width: 80%;
+  line-height: 3rem;
+  text-align: center;
+  overflow-wrap: break-word;
+}
+
+.modal form {
+  background-color: white;
+  min-width: 90vw;
+  padding: 30px 0;
+  border-radius: 10px;
+}
+
+.submit.cancel {
+  background-color: var(--dark-gray);
+}
+
+.submit.delete {
+  background-color: var(--secondary-orange);
+  margin-top: 100px;
 }

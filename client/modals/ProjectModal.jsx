@@ -11,31 +11,38 @@ export default function CreateProject({ createProject, closeProjectModal }) {
     setFormData({ title: e.target.value });
   }
   return (
-    <>
-      <h1>Create a new project</h1>
+    <div className='modal'>
       <form
         onSubmit={(e) => {
           e.preventDefault();
           createProject(formData);
         }}
       >
-        <label htmlFor='projectTitle'>Enter a project title</label>
-        <input
-          id='projectTitle'
-          type='text'
-          value={formData.title}
-          onChange={updateForm}
-        />
-        <label htmlFor='projectTeams'>Which teams are involved</label>
-        <input type='text' />
+        <h1>Create Project</h1>
+        <div className='input-container'>
+          <input
+            id='projectTitle'
+            type='text'
+            value={formData.title}
+            onChange={updateForm}
+            placeholder='TITLE'
+          />
+        </div>
+        <div className='input-container'>
+          <input
+            type='text'
+            placeholder='TEAMS'
+          />
+        </div>
+        <button className='submit'>Create project</button>
         <button
           type='button'
           onClick={closeProjectModal}
+          className='submit cancel'
         >
           Cancel
         </button>
-        <button>Create project</button>
       </form>
-    </>
+    </div>
   );
 }

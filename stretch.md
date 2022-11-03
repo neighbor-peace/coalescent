@@ -9,3 +9,4 @@ TODO: add hashing function that takes team name and outputs color hex
 
 TODO: ICONS
 TODO: COLORFUL UNDERLINES
+TODO: back arrow instead of cancel

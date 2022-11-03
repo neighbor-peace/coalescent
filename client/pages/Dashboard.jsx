@@ -219,9 +219,9 @@ function Dashboard() {
       id='dashboard'
       className='page'
     >
-      <h2 className='welcome'>
+      {/* <h2 className='welcome'>
         Welcome, <span>{userData.firstName} !</span>
-      </h2>
+      </h2> */}
       {/* MODALS */}
       {modalState.projectModal && (
         <ProjectModal

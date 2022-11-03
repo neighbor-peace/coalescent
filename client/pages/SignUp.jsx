@@ -59,7 +59,7 @@ export default function SignUp() {
       <div>
         <h1>Sign Up</h1>
         <form onSubmit={handleSubmit}>
-          <div className='inputContainer'>
+          <div className='input-container'>
             <input
               className='firstName'
               type='text'
@@ -69,7 +69,7 @@ export default function SignUp() {
             />
           </div>
 
-          <div className='inputContainer'>
+          <div className='input-container'>
             <input
               className='lastName'
               type='text'
@@ -83,7 +83,7 @@ export default function SignUp() {
               <p>This username is taken</p>
             </div>
           )}
-          <div className='inputContainer'>
+          <div className='input-container'>
             <input
               className='username'
               type='text'
@@ -93,7 +93,7 @@ export default function SignUp() {
             />
           </div>
 
-          <div className='inputContainer'>
+          <div className='input-container'>
             <input
               className='password'
               type={pwdIsHidden ? 'password' : 'text'}
@@ -118,7 +118,7 @@ export default function SignUp() {
           />
 
           {!formData.isAdmin && (
-            <div className='inputContainer'>
+            <div className='input-container'>
               <input
                 className='team'
                 type='text'

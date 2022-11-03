@@ -47,7 +47,7 @@ export default function LogIn() {
       <div>
         <h1>Log In</h1>
         <form onSubmit={handleSubmit}>
-          <div className='inputContainer'>
+          <div className='input-container'>
             <input
               className='username'
               type='text'
@@ -57,7 +57,7 @@ export default function LogIn() {
             />
           </div>
 
-          <div className='inputContainer'>
+          <div className='input-container'>
             <input
               className='password'
               type={pwdIsHidden ? 'password' : 'text'}

@@ -15,34 +15,38 @@ export default function ProjectEditor({
     setFormData({ projectTitle: e.target.value });
   }
   return (
-    <>
-      <h1>Edit your project</h1>
+    <div className='modal'>
       <form
         onSubmit={(e) => {
           e.preventDefault();
           updateProject({ ...formData, projectId });
         }}
       >
-        <label htmlFor='updateProjectTitle'>Edit Title</label>
-        <input
-          type='text'
-          value={formData.projectTitle}
-          onChange={handleChange}
-        />
-        <button
-          type='button'
-          onClick={(e) => deleteProject(projectId)}
-        >
-          Delete Project
-        </button>
+        <h1>Edit Project</h1>
+        <div className='input-container'>
+          <input
+            type='text'
+            value={formData.projectTitle}
+            onChange={handleChange}
+            placeholder='TITLE'
+          />
+        </div>
+        <button className='submit'>Submit Changes</button>
         <button
           type='button'
           onClick={closeProjectEditor}
+          className='submit cancel'
         >
           Cancel
         </button>
-        <button>Submit Changes</button>
+        <button
+          type='button'
+          onClick={(e) => deleteProject(projectId)}
+          className='submit delete'
+        >
+          Delete Project
+        </button>
       </form>
-    </>
+    </div>
   );
 }
