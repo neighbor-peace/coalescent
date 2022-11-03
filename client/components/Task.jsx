@@ -7,9 +7,10 @@ export default function Task({
   openTaskEditor,
   projectId,
   taskId,
+  deleteTask,
 }) {
   return (
-    <>
+    <div className='task'>
       <h2>{title}</h2>
       <button
         onClick={() =>
@@ -20,7 +21,9 @@ export default function Task({
       </button>
       <h3>{team}</h3>
       <p>{description}</p>
-      {/* TODO: ADD BUTTON TO COMPLETE TASK */}
-    </>
+      <button onClick={() => deleteTask(projectId, taskId)}>
+        Complete Task
+      </button>
+    </div>
   );
 }

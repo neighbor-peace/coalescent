@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 export default function LogIn() {
   const initialFormState = {
@@ -44,7 +44,6 @@ export default function LogIn() {
       id='login'
       className='page'
     >
-      {loginFailed && <p>Incorrect username or password</p>}
       <form onSubmit={handleSubmit}>
         <label htmlFor='username'>Enter your username</label>
         <input
@@ -52,22 +51,31 @@ export default function LogIn() {
           type='text'
           value={formData.username}
           onChange={(e) => handleChange(e, 'username')}
+          placeholder='USERNAME'
         />
         <label htmlFor='password'>Enter your password</label>
-        <input
-          id='password'
-          type={pwdIsHidden ? 'password' : 'text'}
-          value={formData.password}
-          onChange={(e) => handleChange(e, 'password')}
-        />
-        <button
-          type='button'
-          onClick={togglePwdIsHidden}
-        >
-          {pwdIsHidden ? 'Show Password' : 'Hide Password'}
-        </button>
-        <button>Log In</button>
+        <div>
+          <input
+            id='password'
+            type={pwdIsHidden ? 'password' : 'text'}
+            value={formData.password}
+            onChange={(e) => handleChange(e, 'password')}
+            placeholder='PASSWORD'
+          />
+
+          <button
+            type='button'
+            onClick={togglePwdIsHidden}
+          >
+            {pwdIsHidden ? 'Show Password' : 'Hide Password'}
+          </button>
+        </div>
+        <button className='submit'>Log In</button>
       </form>
+      {loginFailed && <p>Incorrect username or password</p>}
+      <p>
+        Need an account? <Link to='/signup'>Sign Up</Link>
+      </p>
     </section>
   );
 }

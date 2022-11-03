@@ -198,7 +198,10 @@ function Dashboard() {
       .catch((err) => console.log(err));
   }
   return (
-    <>
+    <section
+      id='dashboard'
+      className='page'
+    >
       {/* MODALS */}
       {modalState.projectModal && (
         <ProjectModal
@@ -223,7 +226,6 @@ function Dashboard() {
           closeProjectEditor={closeProjectEditor}
         />
       )}
-
       {modalState.taskEditor.isOpen && (
         <TaskEditor
           projectId={modalState.taskEditor.projectId}
@@ -249,8 +251,9 @@ function Dashboard() {
         openTaskModal={openTaskModal}
         openProjectEditor={openProjectEditor}
         openTaskEditor={openTaskEditor}
+        deleteTask={deleteTask}
       />
-    </>
+    </section>
   );
 }
 export default Dashboard;

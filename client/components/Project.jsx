@@ -8,6 +8,7 @@ export default function Project({
   projectId,
   openProjectEditor,
   openTaskEditor,
+  deleteTask,
 }) {
   const tasks = tasksArr.map((task) => (
     <Task
@@ -18,10 +19,11 @@ export default function Project({
       openTaskEditor={openTaskEditor}
       projectId={projectId}
       taskId={task._id}
+      deleteTask={deleteTask}
     />
   ));
   return (
-    <>
+    <div className='project'>
       <div>
         <h1>{title}</h1>
         <button onClick={(e) => openTaskModal(projectId, title)}>
@@ -32,6 +34,6 @@ export default function Project({
         </button>
       </div>
       {tasks}
-    </>
+    </div>
   );
 }

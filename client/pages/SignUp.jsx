@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 export default function SignUp() {
   const initialFormState = {
     firstName: '',
@@ -63,6 +63,7 @@ export default function SignUp() {
           type='text'
           value={formData.firstName}
           onChange={(e) => handleChange(e, 'firstName')}
+          placeholder='FIRST NAME'
         />
 
         <label htmlFor='lastName'>Enter your last name</label>
@@ -118,8 +119,11 @@ export default function SignUp() {
             onChange={(e) => handleChange(e, 'team')}
           ></input>
         )}
-        <button>Sign Up</button>
+        <button className='submit'>Sign Up</button>
       </form>
+      <p>
+        Already have an account? <Link to='/login'>Log In</Link>
+      </p>
     </section>
   );
 }

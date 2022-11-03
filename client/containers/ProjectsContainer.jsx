@@ -6,6 +6,7 @@ export default function ProjectsContainer({
   openTaskModal,
   openProjectEditor,
   openTaskEditor,
+  deleteTask,
 }) {
   const projects = projectData.map((project) => (
     <Project
@@ -16,7 +17,8 @@ export default function ProjectsContainer({
       openTaskModal={openTaskModal}
       openProjectEditor={openProjectEditor}
       openTaskEditor={openTaskEditor}
+      deleteTask={deleteTask}
     />
   ));
-  return <>{projects}</>;
+  return <section id='project-container'>{projects}</section>;
 }
