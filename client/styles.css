@@ -56,6 +56,10 @@ h1 {
   align-items: center;
 }
 
+/* #login form {
+  max-width: 90%;
+} */
+
 input {
   width: 75vw;
   height: var(--input-height);
@@ -111,6 +115,7 @@ div.valErr {
   color: white;
   font-size: 0.9rem;
   font-weight: 900;
+  margin: 10px 0;
 }
 
 p.link {

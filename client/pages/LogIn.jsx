@@ -47,18 +47,19 @@ export default function LogIn() {
       <div>
         <h1>Log In</h1>
         <form onSubmit={handleSubmit}>
-          <div>
+          <div className='inputContainer'>
             <input
-              id='username'
+              className='username'
               type='text'
               value={formData.username}
               onChange={(e) => handleChange(e, 'username')}
               placeholder='USERNAME'
             />
           </div>
-          <div>
+
+          <div className='inputContainer'>
             <input
-              id='password'
+              className='password'
               type={pwdIsHidden ? 'password' : 'text'}
               value={formData.password}
               onChange={(e) => handleChange(e, 'password')}
@@ -72,13 +73,14 @@ export default function LogIn() {
               {pwdIsHidden ? 'Show' : 'Hide'}
             </button>
           </div>
+
           <button className='submit'>LOG IN</button>
+          {loginFailed && (
+            <div className='valErr'>
+              <p>Incorrect username or password</p>
+            </div>
+          )}
         </form>
-        {loginFailed || (
-          <div className='valErr'>
-            <p>Incorrect username or password</p>
-          </div>
-        )}
         <p className='link'>
           Need an account?{' '}
           <Link to='/signup'>
