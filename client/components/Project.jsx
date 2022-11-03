@@ -30,18 +30,20 @@ export default function Project({
   ));
   return (
     <div className='project'>
-      <div>
-        <h1>{title}</h1>
-        {isAdmin && (
-          <button onClick={(e) => openTaskModal(projectId, title)}>
-            Add task
-          </button>
-        )}
-        {isAdmin && (
-          <button onClick={(e) => openProjectEditor(projectId, title)}>
-            Edit Project
-          </button>
-        )}
+      <div className='project-title'>
+        <h2>{title}</h2>
+        <div className='buttons-container'>
+          {isAdmin && (
+            <button onClick={(e) => openProjectEditor(projectId, title)}>
+              Edit Project
+            </button>
+          )}
+          {isAdmin && (
+            <button onClick={(e) => openTaskModal(projectId, title)}>
+              Add task
+            </button>
+          )}
+        </div>
       </div>
       {tasks}
     </div>

@@ -6,11 +6,25 @@
   --light-gray: #f4f4f4;
   --dark-gray: #828282;
   --light-black: #3c4a55;
-
+  --black: #0e1a20;
   --input-height: 50px;
 }
+
+html {
+  margin: 0;
+  padding: 0;
+}
+
 h1 {
   font-size: 2rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+}
+
+h3 {
+  font-size: 1.2rem;
 }
 /* APP.JSX */
 #spinner {
@@ -130,13 +144,65 @@ p.link span {
 /* DASHBOARD */
 
 #dashboard {
-  display: flex;
-  flex-direction: column;
+  padding: 0 15px;
 }
 
-nav {
+.welcome {
+  color: var(--gray);
+  text-align: center;
+  /* backgrou */
+  /* TODO: add background gradient */
+}
+
+.welcome span {
+  color: var(--black);
+}
+
+/* NAVBAR */
+
+#navbar {
   display: flex;
-  background-color: purple;
+  align-items: center;
+  justify-content: space-between;
+  top: 0;
+  left: 0;
+  border-bottom: 1px solid var(--gray);
+  padding: 30px 10px 20px 10px;
+  background-color: white;
+}
+
+#navbar.sticky {
+  position: sticky;
+}
+
+#navbar button {
+  background-color: var(--primary-purple);
+  color: white;
+  border-style: none;
+  border-radius: 10px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  padding: 5px 15px;
+}
+
+#navbar .username {
+  text-align: right;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+#navbar .userteam {
+  text-align: right;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--dark-gray);
+}
+
+/* DASHBOARD */
+
+#dashboard {
+  display: flex;
+  flex-direction: column;
 }
 
 #project-container {
@@ -147,10 +213,73 @@ nav {
 .project {
   display: flex;
   flex-direction: column;
-  border: 1px solid red;
+  margin: 10px;
+}
+
+.project-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.project-title .buttons-container {
+  margin-right: 10px;
+}
+
+.project button {
+  border-style: none;
+  background-color: transparent;
+  color: var(--primary-purple);
+  font-size: 0.9rem;
+  font-weight: 600;
 }
 
 .task {
-  background-color: aqua;
-  border: 1px solid black;
+  display: flex;
+  align-items: center;
+  /* background-color: rgb(255, 255, 255); */
+  box-shadow: 10px 10px 30px rgb(223, 223, 223);
+  border-style: none;
+  border-radius: 20px;
+  padding: 10px 20px;
+  margin: 10px 0;
+}
+
+.task-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  /* background-color: blue; */
+  align-items: flex-start;
+}
+
+.task-info > :first-child {
+  display: flex;
+  align-items: center;
+}
+
+.task-info h3 {
+  margin: 5px 10px 5px 5px;
+}
+
+.task-info span {
+  font-weight: 600;
+  color: var(--dark-gray);
+}
+
+.task-info p {
+  margin: 0 5px 5px 5px;
+}
+.task .buttons-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-left: solid var(--gray) 1px;
+  padding-left: 10px;
+  height: 80px;
+}
+
+.task button {
+  margin: 10px 0;
 }

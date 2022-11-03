@@ -33,7 +33,7 @@ class App extends Component {
           <Routes>
             <Route
               path='/'
-              element={isLoggedIn ? <Dashboard /> : <LogIn />}
+              element={isLoggedIn ? <Dashboard /> : <SignUp />}
             />
             <Route
               path='/signup'

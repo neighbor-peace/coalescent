@@ -219,6 +219,9 @@ function Dashboard() {
       id='dashboard'
       className='page'
     >
+      <h2 className='welcome'>
+        Welcome, <span>{userData.firstName} !</span>
+      </h2>
       {/* MODALS */}
       {modalState.projectModal && (
         <ProjectModal
@@ -259,8 +262,7 @@ function Dashboard() {
       {/* COMPONENTS */}
       <Navbar
         username={userData.username}
-        firstName={userData.firstName}
-        lastName={userData.lastName}
+        userTeam={userData.team}
         openProjectModal={openProjectModal}
         isAdmin={userData.isAdmin}
       />

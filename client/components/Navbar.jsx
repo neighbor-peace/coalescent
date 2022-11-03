@@ -2,26 +2,29 @@ import React from 'react';
 
 export default function Navbar({
   username,
-  firstName,
-  lastName,
   openProjectModal,
   isAdmin,
+  userTeam,
 }) {
   return (
-    <section id='navbar'>
-      <p>
-        Welcome back, <strong>{firstName}</strong>
-      </p>
-      <nav>
-        <h1>Logo</h1>
-        {isAdmin && (
-          <button onClick={openProjectModal}>Create New Project</button>
+    <nav
+      id='navbar'
+      className={isAdmin ? 'sticky' : ''}
+    >
+      {isAdmin ? (
+        <button onClick={openProjectModal}>Create Project</button>
+      ) : (
+        <div className='username'>{username}</div>
+      )}
+      <div id='user-profile'>
+        {/* <img /> */}
+        {isAdmin && <div className='username'>{username}</div>}
+        {isAdmin ? (
+          <div className='userteam'>Project Manager</div>
+        ) : (
+          <div className='userteam'>{userTeam} Team</div>
         )}
-        <div id='user-profile'>
-          <img />
-          <span>{username}</span>
-        </div>
-      </nav>
-    </section>
+      </div>
+    </nav>
   );
 }
