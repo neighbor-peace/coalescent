@@ -5,6 +5,8 @@ import ProjectsContainer from '../containers/ProjectsContainer.jsx';
 import ProjectModal from '../modals/ProjectModal.jsx';
 import ProjectEditor from '../modals/ProjectEditor.jsx';
 import TaskModal from '../modals/TaskModal.jsx';
+import TaskEditor from '../modals/TaskEditor.jsx';
+import { updateTask } from '../../server/controllers/projectController.js';
 
 function Dashboard() {
   const [userData, setUserData] = useState({
@@ -25,7 +27,14 @@ function Dashboard() {
       isOpen: false,
       activeProject: '',
     },
-    taskEditor: false,
+    taskEditor: {
+      isOpen: false,
+      projectId: '',
+      taskId: '',
+      title: '',
+      description: '',
+      team: '',
+    },
   });
   // fetches state on componentDidMount
   useEffect(() => {
@@ -46,10 +55,6 @@ function Dashboard() {
     console.log({ userData, projectData });
   });
 
-  const openProjectModal = () =>
-    setModalState((prevState) => ({ ...prevState, projectModal: true }));
-  const closeProjectModal = () =>
-    setModalState((prevState) => ({ ...prevState, projectModal: false }));
   const openTaskModal = (projectId, projectTitle) => {
     setModalState((prevState) => {
       return {
@@ -73,6 +78,10 @@ function Dashboard() {
       },
     }));
 
+  const openProjectModal = () =>
+    setModalState((prevState) => ({ ...prevState, projectModal: true }));
+  const closeProjectModal = () =>
+    setModalState((prevState) => ({ ...prevState, projectModal: false }));
   const openProjectEditor = (projectId, projectTitle) => {
     setModalState((prevState) => ({
       ...prevState,
@@ -90,6 +99,29 @@ function Dashboard() {
         isOpen: false,
         projectId: '',
         projectTitle: '',
+      },
+    }));
+  };
+  const openTaskEditor = (state) => {
+    setModalState((prevState) => ({
+      ...prevState,
+      taskEditor: {
+        isOpen: true,
+        ...state,
+      },
+    }));
+  };
+
+  const closeTaskEditor = () => {
+    setModalState((prevState) => ({
+      ...prevState,
+      taskEditor: {
+        isOpen: false,
+        projectId: '',
+        taskId: '',
+        title: '',
+        description: '',
+        team: '',
       },
     }));
   };
@@ -135,16 +167,36 @@ function Dashboard() {
 
   function pushTask(formData) {
     closeTaskModal();
-    console.log('pushing task with form data: ', formData);
     axios
       .post('/api/task', formData)
       .then((res) => {
-        console.log('task pushed successfully. res: ', res);
+        console.log('task pushed successfully.');
         setProjectData(res.data);
       })
       .catch((err) => console.log(`Error in pushTask. ${err}`));
   }
-  // TODO: IMPLEMENT openProjectModal AND createProject funcs
+  function updateTask(formData) {
+    closeTaskEditor();
+    console.log('updating task');
+    axios
+      .patch('/api/task', { ...formData })
+      .then((res) => {
+        console.log('task updated succesfully');
+        setProjectData(res.data);
+      })
+      .catch((err) => console.log(err));
+  }
+  function deleteTask(projectId, taskId) {
+    closeTaskEditor();
+    console.log('deleting task');
+    axios
+      .delete('/api/task', { data: { projectId, taskId } })
+      .then((res) => {
+        console.log('task deleted successfully');
+        setProjectData(res.data);
+      })
+      .catch((err) => console.log(err));
+  }
   return (
     <>
       {/* MODALS */}
@@ -172,6 +224,19 @@ function Dashboard() {
         />
       )}
 
+      {modalState.taskEditor.isOpen && (
+        <TaskEditor
+          projectId={modalState.taskEditor.projectId}
+          taskId={modalState.taskEditor.taskId}
+          title={modalState.taskEditor.title}
+          description={modalState.taskEditor.description}
+          team={modalState.taskEditor.team}
+          closeTaskEditor={closeTaskEditor}
+          updateTask={updateTask}
+          deleteTask={deleteTask}
+        />
+      )}
+
       {/* COMPONENTS */}
       <Navbar
         username={userData.username}
@@ -183,6 +248,7 @@ function Dashboard() {
         projectData={projectData}
         openTaskModal={openTaskModal}
         openProjectEditor={openProjectEditor}
+        openTaskEditor={openTaskEditor}
       />
     </>
   );

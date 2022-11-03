@@ -7,6 +7,7 @@ export default function Project({
   openTaskModal,
   projectId,
   openProjectEditor,
+  openTaskEditor,
 }) {
   const tasks = tasksArr.map((task) => (
     <Task
@@ -14,6 +15,9 @@ export default function Project({
       title={task.title}
       description={task.description}
       team={task.team}
+      openTaskEditor={openTaskEditor}
+      projectId={projectId}
+      taskId={task._id}
     />
   ));
   return (
