@@ -54,7 +54,6 @@ function Dashboard() {
   }, []);
   // fetch project state every second if not an admin
   useEffect(() => {
-    if (userData.isAdmin) return;
     const timeoutId = setTimeout(() => {
       axios
         .get('/api/project')
