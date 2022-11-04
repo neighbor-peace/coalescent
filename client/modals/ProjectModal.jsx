@@ -28,12 +28,6 @@ export default function CreateProject({ createProject, closeProjectModal }) {
             placeholder='TITLE'
           />
         </div>
-        <div className='input-container'>
-          <input
-            type='text'
-            placeholder='TEAMS'
-          />
-        </div>
         <button className='submit'>Create project</button>
         <button
           type='button'

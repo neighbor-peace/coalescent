@@ -215,14 +215,17 @@ p.link span {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  line-height: 1.5rem;
 }
 
 .project-title .buttons-container {
   margin-right: 10px;
+  display: flex;
 }
 
 .project button {
   border-style: none;
+  white-space: nowrap;
   background-color: transparent;
   color: var(--primary-purple);
   font-size: 0.9rem;

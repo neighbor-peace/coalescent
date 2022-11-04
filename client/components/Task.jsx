@@ -15,7 +15,7 @@ export default function Task({
       <div className='task-info'>
         <div>
           <h3>{title}</h3>
-          {isAdmin && <span>{team} Team</span>}
+          {isAdmin && <span>{team}</span>}
         </div>
         <p>{description}</p>
       </div>
