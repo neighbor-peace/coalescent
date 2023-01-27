@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "concurrently \"cross-env NODE_ENV=development webpack-dev-server --open\" \"cross-env NODE_ENV=development nodemon server/server.js\""
+    "start": "concurrently \"cross-env NODE_ENV=development webpack-dev-server --open\" \"cross-env NODE_ENV=development nodemon server/server.js\"",
+    "test": "jest --verbose"
   },
   "nodemonConfig": {
     "ignore": [
@@ -40,6 +41,7 @@
     "mongoose": "^6.7.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.4.3"
+    "react-router-dom": "^6.4.3",
+    "supertest": "^6.3.3"
   }
 }

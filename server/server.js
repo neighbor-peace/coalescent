@@ -8,7 +8,6 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const app = express();
-// 'mongodb://localhost:27017/dev'
 const mongoURI = process.env.MONGO_URI;
 mongoose
   .connect(mongoURI)
@@ -23,6 +22,8 @@ app.use(cookieParser());
 
 //
 app.use('/api', apiRouter);
+
+app.use('/healthCheck', (req, res) => res.sendStatus(200));
 
 app.use((err, req, res, next) => {
   const defaultErr = {
