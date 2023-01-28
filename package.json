@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "concurrently \"cross-env NODE_ENV=development webpack-dev-server --open\" \"cross-env NODE_ENV=development nodemon server/server.js\"",
-    "test": "jest --verbose"
+    "test": "jest --verbose",
+    "watch": "jest --watch"
   },
   "nodemonConfig": {
     "ignore": [

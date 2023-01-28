@@ -8,7 +8,12 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const app = express();
-const mongoURI = process.env.MONGO_URI;
+const mongoURI =
+  process.env.NODE_ENV === 'test'
+    ? process.env.TEST_URI
+    : process.env.MONGO_URI;
+
+console.log({ mongoURI });
 mongoose
   .connect(mongoURI)
   .then(() => console.log('Connected to MongoDB'))
@@ -23,7 +28,7 @@ app.use(cookieParser());
 //
 app.use('/api', apiRouter);
 
-app.use('/healthCheck', (req, res) => res.sendStatus(200));
+app.get('/healthCheck', (req, res) => res.sendStatus(200));
 
 app.use((err, req, res, next) => {
   const defaultErr = {

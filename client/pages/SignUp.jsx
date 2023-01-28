@@ -19,7 +19,7 @@ export default function SignUp() {
   function handleSubmit(e) {
     e.preventDefault();
     axios
-      .post('/api/signup', formData)
+      .post('/api/user/signup', formData)
       .then((res) => {
         setFormData(initialFormState);
         console.log('signup successful. Response: ', res);
