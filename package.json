@@ -1,10 +1,12 @@
 {
-  "name": "project-solo",
+  "name": "Coalescent",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "concurrently \"cross-env NODE_ENV=development webpack-dev-server --open\" \"cross-env NODE_ENV=development nodemon server/server.js\""
+    "start": "concurrently \"cross-env NODE_ENV=development webpack-dev-server --open\" \"cross-env NODE_ENV=development nodemon server/server.js\"",
+    "test": "jest --verbose",
+    "watch": "jest --watch"
   },
   "nodemonConfig": {
     "ignore": [
@@ -35,10 +37,12 @@
     "@fluentui/react-switch": "^9.0.10",
     "axios": "^1.1.3",
     "cookie-parser": "^1.4.6",
+    "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "mongoose": "^6.7.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.4.3"
+    "react-router-dom": "^6.4.3",
+    "supertest": "^6.3.3"
   }
 }

@@ -5,7 +5,7 @@ const cookieController = require('../controllers/cookieController');
 const router = express.Router();
 
 router.post(
-  '/signup',
+  '/user/signup',
   userController.createUser,
   cookieController.setToken,
   (req, res) => {
@@ -14,7 +14,7 @@ router.post(
 );
 
 router.post(
-  '/login',
+  '/user/login',
   userController.verifyUser,
   cookieController.setToken,
   (req, res) => {

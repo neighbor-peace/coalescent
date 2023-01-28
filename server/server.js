@@ -3,10 +3,17 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 const apiRouter = require('./routes/api.js');
+const dotenv = require('dotenv');
+
+dotenv.config();
 
 const app = express();
-// 'mongodb://localhost:27017/dev'
-const mongoURI = 'mongodb://localhost:27017/project-solo-dev';
+const mongoURI =
+  process.env.NODE_ENV === 'test'
+    ? process.env.TEST_URI
+    : process.env.MONGO_URI;
+
+console.log({ mongoURI });
 mongoose
   .connect(mongoURI)
   .then(() => console.log('Connected to MongoDB'))
@@ -20,6 +27,8 @@ app.use(cookieParser());
 
 //
 app.use('/api', apiRouter);
+
+app.get('/healthCheck', (req, res) => res.sendStatus(200));
 
 app.use((err, req, res, next) => {
   const defaultErr = {

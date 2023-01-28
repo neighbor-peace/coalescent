@@ -20,7 +20,7 @@ export default function LogIn() {
   function handleSubmit(e) {
     e.preventDefault();
     axios
-      .post('/api/login', formData)
+      .post('/api/user/login', formData)
       .then((res) => {
         console.log('login successful. Response: ', res);
         return navigate('/dashboard');
