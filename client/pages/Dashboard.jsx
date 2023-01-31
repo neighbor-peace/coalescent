@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { io } from 'socket.io-client';
 import Navbar from '../components/Navbar.jsx';
 import ProjectsContainer from '../containers/ProjectsContainer.jsx';
 import ProjectModal from '../modals/ProjectModal.jsx';
@@ -38,7 +39,7 @@ function Dashboard() {
       team: '',
     },
   });
-  // fetches state on componentDidMount
+  // fetches state and establishes socket connection on componentDidMount
   useEffect(() => {
     async function fetchState() {
       try {
@@ -51,21 +52,24 @@ function Dashboard() {
       }
     }
     fetchState();
+
+    const socket = io('ws://localhost:3000');
+    socket.on('message', console.log);
   }, []);
-  // fetch project state every second if not an admin
-  useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      axios
-        .get('/api/project')
-        .then((res) => {
-          setProjectData(res.data);
-        })
-        .catch((err) => console.log(err));
-    }, 1000);
-    return () => {
-      clearTimeout(timeoutId);
-    };
-  }, [projectData]);
+  // // fetch project state every second if not an admin
+  // useEffect(() => {
+  //   const timeoutId = setTimeout(() => {
+  //     axios
+  //       .get('/api/project')
+  //       .then((res) => {
+  //         setProjectData(res.data);
+  //       })
+  //       .catch((err) => console.log(err));
+  //   }, 1000);
+  //   return () => {
+  //     clearTimeout(timeoutId);
+  //   };
+  // }, [projectData]);
 
   useEffect(() => {
     console.log('Latest state');

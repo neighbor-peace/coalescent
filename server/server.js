@@ -1,19 +1,14 @@
 const express = require('express');
-const path = require('path');
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 const apiRouter = require('./routes/api.js');
-const dotenv = require('dotenv');
 
-dotenv.config();
+require('dotenv').config();
+const { NODE_ENV, TEST_URI, MONGO_URI, PORT } = process.env;
 
 const app = express();
-const mongoURI =
-  process.env.NODE_ENV === 'test'
-    ? process.env.TEST_URI
-    : process.env.MONGO_URI;
 
-console.log({ mongoURI });
+const mongoURI = NODE_ENV === 'test' ? TEST_URI : MONGO_URI;
 mongoose
   .connect(mongoURI)
   .then(() => console.log('Connected to MongoDB'))
@@ -23,11 +18,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-// /api/signup?isAdmin=true
-
-//
 app.use('/api', apiRouter);
-
 app.get('/healthCheck', (req, res) => res.sendStatus(200));
 
 app.use((err, req, res, next) => {
@@ -41,6 +32,15 @@ app.use((err, req, res, next) => {
   return res.status(errorObj.status).json(errorObj.message);
 });
 
-app.listen(3000, () => {
-  console.log('Listening on port 3000');
+const server = app.listen(PORT, () => {
+  console.log(`Listening on port ${PORT}`);
 });
+
+// TODO: resolve cors
+const io = require('socket.io')(server, { cors: { origin: '*' } });
+io.on('connection', (socket) => {
+  console.log('websocket connection established');
+  io.emit('message', 'test message asdf');
+});
+
+module.exports = io;
