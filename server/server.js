@@ -1,10 +1,22 @@
+const fs = require('fs');
+const https = require('https');
+const path = require('path');
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 const apiRouter = require('./routes/api.js');
+const privateKey = fs.readFileSync(
+  path.join(__dirname, '../sslcert/server.key'),
+  'utf8'
+);
+const certificate = fs.readFileSync(
+  path.join(__dirname, '../sslcert/server.crt'),
+  'utf8'
+);
 
 require('dotenv').config();
-const { NODE_ENV, TEST_URI, MONGO_URI, PORT } = process.env;
+const { NODE_ENV, TEST_URI, MONGO_URI } = process.env;
+const port = NODE_ENV === 'development' ? 8443 : 443;
 
 const app = express();
 
@@ -19,7 +31,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.use('/api', apiRouter);
-app.get('/healthCheck', (req, res) => res.sendStatus(200));
 
 app.use((err, req, res, next) => {
   const defaultErr = {
@@ -32,9 +43,11 @@ app.use((err, req, res, next) => {
   return res.status(errorObj.status).json(errorObj.message);
 });
 
-const server = app.listen(PORT, () => {
-  console.log(`Listening on port ${PORT}`);
-});
+// const server = app.listen(PORT, () => {
+//   console.log(`Listening on port ${PORT}`);
+// });
+const server = https.createServer({ key: privateKey, cert: certificate }, app);
+server.listen(port, () => console.log(`listening on port ${port}`));
 
 // TODO: resolve cors
 const io = require('socket.io')(server, { cors: { origin: '*' } });

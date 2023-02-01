@@ -2,13 +2,13 @@ const request = require('supertest');
 const dotenv = require('dotenv');
 dotenv.config();
 
-const server = process.env.SERVER_URL;
+const url = 'http://localhost:8080';
 
 describe('Route integration', () => {
   describe('/healthCheck', () => {
     describe('GET', () => {
       it('responds with 200 status', () => {
-        return request(server).get('/healthCheck').expect(200);
+        return request(url).get('/api/healthCheck').expect(200);
       });
     });
   });

@@ -14,7 +14,7 @@ module.exports = {
       directory: path.resolve(__dirname, 'build'),
     },
     proxy: {
-      '/api': 'http://localhost:3000',
+      '/api': { target: 'https://localhost:8443', secure: false },
     },
   },
   mode: process.env.NODE_ENV,
