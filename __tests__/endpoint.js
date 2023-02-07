@@ -3,6 +3,8 @@ const dotenv = require('dotenv');
 const { Str } = require('@supercharge/strings');
 dotenv.config();
 
+const { TEST_PW } = process.env;
+
 const server = 'http://localhost:8080';
 
 describe('Route integration', () => {
@@ -90,6 +92,31 @@ describe('Route integration', () => {
               isAdmin: false,
             })
             .expect(409);
+        });
+      });
+    });
+
+    describe('/user/login', () => {
+      describe('POST', () => {
+        it('responds with 200 status and application/json type', () => {
+          return request(server)
+            .post('/api/user/login')
+            .send({
+              username: 'test_username',
+              password: TEST_PW,
+            })
+            .expect('content-type', /json/)
+            .expect(200);
+        });
+
+        it('responds with 401 status for incorrect password', () => {
+          return request(server)
+            .post('/api/user/login')
+            .send({
+              username: 'test_username',
+              password: '12345',
+            })
+            .expect(401);
         });
       });
     });
