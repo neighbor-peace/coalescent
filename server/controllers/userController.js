@@ -5,6 +5,11 @@ const userController = {
   createUser(req, res, next) {
     console.log('creating user');
     const { username, password, firstName, lastName, team, isAdmin } = req.body;
+    if (!username || !password || !firstName || !lastName)
+      return next({
+        status: 400,
+        log: 'Error in userController.createUser: Missing form data',
+      });
     User.create({ username, password, firstName, lastName, isAdmin, team })
       .then((user) => {
         console.log(`User created: ${user}`);
