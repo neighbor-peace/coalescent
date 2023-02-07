@@ -4,8 +4,6 @@ const projectController = require('../controllers/projectController');
 const cookieController = require('../controllers/cookieController');
 const router = express.Router();
 
-router.get('/healthCheck', (req, res) => res.sendStatus(200));
-
 router.post(
   '/user/signup',
   userController.createUser,
