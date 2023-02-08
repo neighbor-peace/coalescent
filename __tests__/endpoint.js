@@ -3,7 +3,7 @@ const dotenv = require('dotenv');
 const { Str } = require('@supercharge/strings');
 dotenv.config();
 
-const { TEST_PW } = process.env;
+const { TEST_PW, TEST_ID } = process.env;
 
 const server = 'http://localhost:8080';
 
@@ -19,6 +19,29 @@ describe('Route integration', () => {
   });
 
   describe('/api', () => {
+    describe('/user', () => {
+      describe('GET', () => {
+        it('responds with 200 status, application/json content type, and correct data', () => {
+          return request(server)
+            .get('/api/user')
+            .set('Cookie', [`id=${TEST_ID}`])
+            .send()
+            .expect('content-type', /json/)
+            .expect(200, {
+              _id: TEST_ID,
+              username: 'test_username',
+              password: TEST_PW,
+              createdAt: '2023-02-07T03:00:23.743Z',
+              isAdmin: false,
+              firstName: 'test_first_name',
+              lastName: 'test_last_name',
+              team: 'test_team',
+              __v: 0,
+            });
+        });
+      });
+    });
+
     describe('/user/signup', () => {
       describe('POST', () => {
         const randomStr = Str.random(50);
